@@ -1,0 +1,3 @@
+https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html
+
+https://github.com/SAP/cloud-s4-sdk-book/blob/master/docs/opensap/index.md

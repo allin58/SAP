@@ -1,0 +1,7 @@
+//Getting Data
+ODataQueryResult result = ODataQueryBuilder
+  .withEntity("/sap/opu/odata/IWBEP/GWSAMPLE_BASIC", "ProductSet")
+  .select("ProductID", "Name", "Description", "Category", "Price")
+  .inlineCount()
+  .build()
+  .execute(DESTINATION_NAME);

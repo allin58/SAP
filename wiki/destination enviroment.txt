@@ -1,0 +1,4 @@
+destinations=[{name: "ErpQueryEndpoint", url: "https://odata-mock-server-noisy-baboon-zw.cfapps.eu10.hana.ondemand.com", username: "USER", password: "PASSWORD"}]
+
+
+set destinations=[{name: "ErpQueryEndpoint", url: "https://URL", username: "USER", password: "PASSWORD"}]

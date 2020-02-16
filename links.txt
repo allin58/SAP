@@ -1,0 +1,55 @@
+
+#Helloworld
+https://habr.com/ru/company/sap/blog/350690/
+
+#SAP Cloud Platform course
+https://open.sap.com/courses/cp5
+https://github.com/SAP-samples/cloud-cap-walkthroughs/tree/master/exercises-java
+
+
+#S/4HANA course
+https://open.sap.com/courses/s4h13/items/FVZzb3eSpv5WyRGKrfSWd
+
+#Generator edmx
+https://blogs.sap.com/2018/04/12/sap-s4hana-cloud-sdk-version-1.10.0-is-available/ 
+
+#Mock buisnesPartner
+https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html
+https://github.com/SAP/cloud-s4-sdk-book/blob/master/docs/opensap/index.md
+
+#Northwind
+https://services.odata.org/V2/OData/OData.svc/
+
+
+#Calling an OData Service
+https://blogs.sap.com/2017/05/21/step-4-with-sap-s4hana-cloud-sdk-calling-an-odata-service/#WriteBusinessPartnerServlet
+
+#Creating an OData Service
+https://blogs.sap.com/2017/10/17/introducing-the-sap-cloud-platform-sdk-for-service-development/
+
+
+#About CSN
+https://answers.sap.com/questions/12878338/csn-file-in-the-cloud-programming-model-s4-hana-cl.html
+
+#About CSN  cds
+https://cap.cloud.sap/docs/
+
+#Tutorial navigator
+https://developers.sap.com/tutorial-navigator.html
+
+
+#Annotations
+https://help.sap.com/doc/95d074a0671142da8dde4e6a29e622a9/Cloud/en-US/com/sap/cloud/sdk/service/prov/api/annotations/package-summary.html
+
+
+#About OData
+https://blogs.sap.com/2018/03/01/sap-cloud-platform-sdk-for-service-development-overview-of-blogs/
+
+#Cockpit
+https://cockpit.hanatrial.ondemand.com/cockpit/
+
+
+
+
+
+
