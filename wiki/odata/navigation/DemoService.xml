@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+<edmx:DataServices>
+	<Schema Namespace="demo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+		<EntityType Name="Person">
+			<Key>
+				<PropertyRef Name="PersonId" />
+			</Key>
+			<Property Name="PersonId" Type="Edm.Int32" />
+			<Property Name="Name" Type="Edm.String" />
+			<Property Name="JobId" Type="Edm.Int32" />
+			<NavigationProperty Name="Occupation" Type="demo.Job" Partner="Employees" />
+		</EntityType>
+		<EntityType Name="Job">
+			<Key>
+				<PropertyRef Name="JobId" />
+			</Key>
+			<Property Name="JobId" Type="Edm.Int32" />
+			<Property Name="JobName" Type="Edm.String" />
+			<NavigationProperty Name="Employees" Type="Collection(demo.Person)" Partner="Occupation" />
+		</EntityType>
+
+		<EntityContainer Name="container">
+			<EntitySet Name="People" EntityType="demo.Person">
+				<NavigationPropertyBinding Path="Occupation" Target="Jobs" />
+			</EntitySet>
+			<EntitySet Name="Jobs" EntityType="demo.Job" >
+				<NavigationPropertyBinding Path="Employees" Target="People" />
+			</EntitySet>
+		</EntityContainer>
+	</Schema>
+</edmx:DataServices>
+</edmx:Edmx>

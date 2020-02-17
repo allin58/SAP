@@ -1,0 +1,23 @@
+public class CreateAddressCommand extends ErpCommand<BusinessPartnerAddress> {
+    private static final Logger logger = CloudLoggerFactory.getLogger(CreateAddressCommand.class);
+
+    private final BusinessPartnerService service;
+    private final BusinessPartnerAddress addressToCreate;
+
+    public CreateAddressCommand(final BusinessPartnerService service, final BusinessPartnerAddress addressToCreate) {
+     //   super(CreateAddressCommand.class);
+        super(HystrixUtil.getDefaultErpCommandSetter(
+                CreateAddressCommand.class,
+                HystrixUtil.getDefaultErpCommandProperties()
+                        .withExecutionTimeoutInMilliseconds(10000)
+        ));
+        this.service = service;
+        this.addressToCreate = addressToCreate;
+    }
+
+    @Override
+    protected BusinessPartnerAddress run() throws Exception {
+        // TODO: Replace with Virtual Data Model query
+        return service.createBusinessPartnerAddress(addressToCreate).execute();
+    }
+}

@@ -1,0 +1,31 @@
+@Read(serviceName="DemoService", entity="People")
+	public ReadResponse getPerson(ReadRequest request) {
+
+		// retrieve the requested person from URI
+		Map<String, Object> keyPredicates = request.getKeys();
+		Object keyObject = keyPredicates.get("UniqueId");
+		Integer id = (Integer)keyObject;
+
+		// search the requested person in the database
+		List<Map<String, Object>> peopleList = getPeople();
+		Map<String, Object> requestedPersonMap = new HashMap<String, Object>();
+		for(Map<String, Object> personMap : peopleList) {
+			if(((Integer)personMap.get("UniqueId")).equals(id)) {
+				// found it
+				requestedPersonMap = personMap;
+			}
+		}
+
+		// handle error: "not found"
+		if(requestedPersonMap.isEmpty()) {
+			Logger logger = LoggerFactory.getLogger(ServiceImplementation.class);
+			logger.error("Person with UniqueId " + id + " doesn't exist! Service request was invoked with invalid key value");
+			ErrorResponse response = ErrorResponse.getBuilder()
+					.setMessage("Person with UniqueId " + id + " doesn't exist!")
+					.setStatusCode(404)
+					.response();
+			return ReadResponse.setError(response);
+		}
+
+		return ReadResponse.setSuccess().setData(requestedPersonMap).response();
+	}

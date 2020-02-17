@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+	<edmx:DataServices>
+		<Schema Namespace="demo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<EntityType Name="Person">
+				<Key>
+					<PropertyRef Name="UniqueId" />
+				</Key>
+				<Property Name="UniqueId" Type="Edm.Int32" />
+				<Property Name="Name" Type="Edm.String"/>
+				<Property Name="HomeAddress" Type="demo.Address" />
+			</EntityType>
+
+			<ComplexType Name="Address">
+				<Property Name="City" Type="Edm.String"/>
+				<Property Name="Street" Type="Edm.String" />
+				<Property Name="Number" Type="Edm.Int32" />
+			</ComplexType>
+
+			<EntityContainer Name="container">
+				<EntitySet Name="People" EntityType="demo.Person" />
+			</EntityContainer>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

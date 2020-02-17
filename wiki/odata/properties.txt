@@ -1,0 +1,1 @@
+https://blogs.sap.com/2018/03/13/sap-cloud-platform-sdk-for-service-development-create-odata-service-5-property-facets/

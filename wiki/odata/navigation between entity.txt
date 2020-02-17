@@ -1,0 +1,28 @@
+<EntityType Name="Job">
+   <Key>
+      <PropertyRef Name="JobId" />
+   </Key>
+   <Property Name="JobId" Type="Edm.Int32" />
+   <Property Name="JobName" Type="Edm.String" />
+</EntityType>
+
+
+
+<EntityType Name="Person">
+   . . .
+   <NavigationProperty Name="Occupation" Type="demo.Job" Partner="Employees" />
+
+
+<EntityType Name="Job">
+   . . .
+   <NavigationProperty Name="Employees" Type="Collection(demo.Person)" Partner="Occupation" />
+
+
+Partner:
+
+This attribute is optional and we’re using it to indicate that we want bi-directional relationship.
+
+What do we have to specify here?
+It is the name of the navigation property of the foreign entity type.
+
+Note that each entity type can have multiple navigation properties, so it is required to specify which one is the partner

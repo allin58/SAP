@@ -1,0 +1,9 @@
+---
+applications:
+
+- name: cloud-servicesdk-odatav4-quickstart
+  memory: 815M
+  host: cloud-servicesdk-odatav4-quickstart
+  path: target/DemoService-0.0.1-SNAPSHOT.war
+  buildpack: sap_java_buildpack
+  

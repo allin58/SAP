@@ -1,0 +1,9 @@
+{
+    "UniqueId": 4,
+    "Name": "Eric",
+    "HomeAddress": {
+        "City": "New York",
+        "Street": "5th Avenue",
+        "Number": 87
+    }
+}

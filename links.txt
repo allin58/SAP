@@ -24,6 +24,7 @@ https://services.odata.org/V2/OData/OData.svc/
 #Calling an OData Service
 https://blogs.sap.com/2017/05/21/step-4-with-sap-s4hana-cloud-sdk-calling-an-odata-service/#WriteBusinessPartnerServlet
 
+
 #Creating an OData Service
 https://blogs.sap.com/2017/10/17/introducing-the-sap-cloud-platform-sdk-for-service-development/
 
@@ -47,6 +48,12 @@ https://blogs.sap.com/2018/03/01/sap-cloud-platform-sdk-for-service-development-
 
 #Cockpit
 https://cockpit.hanatrial.ondemand.com/cockpit/
+
+
+#Manifest for cloud
+https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html
+
+
 
 
 

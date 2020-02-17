@@ -1,0 +1,1 @@
+@Scope(WebApplicationContext.SCOPE_REQUEST) to the controller's class definition or simply add @RequestScope

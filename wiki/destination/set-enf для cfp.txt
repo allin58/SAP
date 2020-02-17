@@ -1,0 +1,4 @@
+cf set-env firstapp destinations "[{name: \"MyErpSystem\", url: \"https://URL\", username: \"USER\", password: \"PASSWORD\"}]"
+
+cf set-env address-manager destinations "[ {name: 'ErpQueryEndpoint', url: 'http://odata-mock-server-noisy-baboon-zw.cfapps.eu10.hana.ondemand.com', username: 'DUMMY', password: 'dummy'}]"
+

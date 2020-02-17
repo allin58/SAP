@@ -1,0 +1,133 @@
+cf api CLOUD_FOUNDRY_API_ENDPOINT   установка endpoint
+cf api api.cf.eu10.hana.ondemand.com
+
+cf set-env firstapp destinations "[ {name: 'ErpQueryEndpoint', url: 'http://odata-mock-server-noisy-baboon-zw.cfapps.eu10.hana.ondemand.com', username: 'DUMMY', password: 'dummy'}]"
+
+cf unset-env firstapp destinations удалить env
+
+cf env APP_NAME 
+
+cf login
+
+cf target -o ORGANIZATION -s SPACE - выбрать конкретную организацию
+
+Перед загрузкой приложения в среду Cloud Foundry, вы можете либо прописать параметры приложения в командной строке
+ для команды push, позволяющей запустить приложение в облаке, либо использовать файл дискриптора приложения (manifest.yml), 
+установив в нем параметры для перемещения, что позволит не вводить их заново каждый раз перед использованием команды push.
+ Дополнительную информацию о файле манифеста приложения вы можете найти в документации о Cloud Foundry.
+
+manifest.yml
+
+applications:
+# Application
+— name: product-list
+instances: 1
+memory: 896M
+host: product-list-YOUR-BIRTHDATE-DAY-MONTH-YEAR
+path: target/my-product-list-0.0.1-SNAPSHOT.jar
+buildpack: github.com/cloudfoundry/java-buildpack.git#v4.3
+
+Строка path должна указывать на файл jar, созданный в целевой папке проекта в результате сборки с помощью Maven, и возможно, вам придется заменить имя флага на имя вашего jar-файла.
+host должен быть уникальным, поскольку пространство имен хостов разделяется со всеми приложениями в Cloud Foundry, поэтому добавьте в конце свою дату рождения — день, месяц и гоcf 
+
+cf push - залить на облако  - работает
+
+cf push -t 180 -i 1 - работает
+
+cf marketplace  выводит список доступных сервисов
+
+cf marketplace -s postgresql - информация о сервисе
+
+cf create-service SERVICE PLAN SERVICE_INSTANCE - создание службы 
+
+cf services - выводит подключенные сервисы
+
+привязать сервис
+cf marketplace
+cf create-service application-logs lite myapplogs
+cf services
+cf bind-service product-list myapplogs
+cf restage product-list
+
+cf stop APP_NAME - остановить приложение
+
+Используйте команду cf scale APP_NAME -k DISK для изменения ограничения на дисковое пространство, применяемого ко всем экземплярам вашего приложения. DISK – целое число, после которого необходимо указать M для мегабайт или G для гигабайт.
+Используйте команду cf scale APP_NAME -m MEMORY для изменения ограничения памяти, применяемого ко всем экземплярам вашего приложения. MEMORY — целое число, после которого необходимо указать M для мегабайт или G для гигабайт.
+Предположим, мы хотим уменьшить масштаб приложения и сделать его более компактным, установив ограничение памяти до 712 МБ. Для этого необходимо ввести следующую команду:
+cf scale APP_NAME -m 712M
+Получим список приложений, запущенных в пространстве нашей учетной записи, с информацией о них. Это можно сделать через CF CLI и через панель управления.
+CF CLI
+
+
+Для отображения списка созданных экземпляров служб и их привязок введите следующую команду:
+cf services
+
+cf logs product-list вывести логи
+Чтобы выйти из режима потока логов в реальном времени в консоли, нажмите Ctrl + C.
+Для отображения последних логов приложения воспользуйтесь следующей командой:
+cf logs product-list --recent
+
+Для отображения метрик приложения, введите в терминале команду:
+cf app product-list
+
+Увидеть последние события приложения через терминал можно с помощью команды cf events APP_NAME. Введите команду:
+cf events product-list
+
+
+В следующих примерах показано, как обращаться к переменным среды из приложения программным способом: примеры на Java, NodeJS и Ruby.
+System.getenv(«VCAP_SERVICES»);
+
+Специфичные для среды приложения переменные могут быть заданы разработчиком приложения с помощью команды в CF CLI:
+cf set-env APP_NAME VARIABLE_NAME VARIABLE_VALUE
+
+Или путём их описания в файле manifest.yml приложения следующим образом:\
+env:
+VARIABLE_NAME_1: VARIABLE_VALUE_1
+VARIABLE_NAME_2: VARIABLE_VALUE_2
+
+
+
+Также тип проверки работоспособности приложения можно указать в файле manifest.yml следующим образом:
+health-check-type: http
+health-check-http-endpoint: /health
+timeout: 120
+
+cf get-health-check product-list  
+
+
+
+cf app APP-NAME - инфо о приложении
+cf scale APP_NAME -m 712M - маштабировать вертикально
+
+cf scale APP_NAME -i INSTANCES - маштабировать горизонтально
+
+
+Затем вы должны указать параметры масштабирования. Правила масштабирования экземпляра приложения определяются в формате JSON. Обычно вы создаете файл JSON и предоставляете его в качестве конфигурации. Для нашего примера вы можете скопировать и вставить фрагмент, представленный ниже:
+
+{
+«instance_min_count»: 1,
+«instance_max_count»: 3,
+«scaling_rules»: [
+{
+«metric_type»: «memoryused»,
+«stat_window_secs»: 60,
+«breach_duration_secs»: 60,
+«threshold»: 400,
+«operator»: ">=",
+«cool_down_secs»: 60,
+«adjustment»: "+1"
+}
+]
+}
+
+
+// создание destination
+cf create-service xsuaa application my-xsuaa
+cf create-service destination lite my-destination
+и добавить  services:
+  - my-destination
+  - my-xsuaa  
+в манифест
+
+
+

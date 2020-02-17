@@ -1,0 +1,3 @@
+WebIDEUsage odata_gen
+WebIDEEnabled true 
+WebIDESystem Northwind

@@ -1,0 +1,35 @@
+    
+
+////select
+public List<BusinessPartner> execute() throws Exception {
+        // TODO: Replace with Virtual Data Model query
+        return service.getAllBusinessPartner()
+                .select(BusinessPartner.BUSINESS_PARTNER,BusinessPartner.LAST_NAME,BusinessPartner.FIRST_NAME)   /// эти параметры влияют на view
+                .filter(BusinessPartner.BUSINESS_PARTNER_CATEGORY.eq(CATEGORY_PERSON))
+            .orderBy(BusinessPartner.LAST_NAME,Order.ASC)
+                .execute() ;
+}
+
+
+
+
+///delete
+    public Integer execute() throws Exception {
+        // TODO: Replace with Virtual Data Model query
+
+BusinessPartnerAddress businessPartnerAddress = BusinessPartnerAddress.builder().businessPartner(businessPartnerId).addressID(addressId).build();
+ODataDeleteResult oDataDeleteResult = service.deleteBusinessPartnerAddress(businessPartnerAddress).execute();
+        return oDataDeleteResult.getHttpStatusCode();
+    }
+}
+
+
+
+////upadate
+    public Integer execute() throws Exception {
+
+        ODataUpdateResult oDataUpdateResult = service.updateBusinessPartnerAddress(addressToUpdate).execute();
+     
+        return oDataUpdateResult.getHttpStatusCode();
+
+    }

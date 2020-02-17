@@ -1,0 +1,15 @@
+final ErpHttpDestination destination = DestinationAccessor.getDestination("MyErpSystem").asHttp().decorate(DefaultErpHttpDestination::new);
+final List<MyBusinessPartnerType> businessPartners = ODataQueryBuilder
+        .withEntity("/sap/opu/odata/sap/API_BUSINESS_PARTNER",
+                "A_BusinessPartner")
+        .select("BusinessPartner",
+                "LastName",
+                "FirstName",
+                "IsMale",
+                "IsFemale",
+                "CreationDate")
+        .build()
+        .execute(destination)
+        .asList(MyBusinessPartnerType.class);
+
+

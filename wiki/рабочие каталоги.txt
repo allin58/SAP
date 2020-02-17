@@ -1,0 +1,12 @@
+C:\Users\Nikita_Karchahin\SAP\cloud-s4-sdk-book-course-2_1_start   
+
+C:\Users\Nikita_Karchahin\SAP\mock\cloud-s4-sdk-book   -    mock
+
+
+set destinations=[{name: 'ErpQueryEndpoint', url: 'http://localhost:3000', username: 'DUMMY', password: 'dummy'}]
+
+set destinations=[{name: 'ErpQueryEndpoint', url: 'https://odata-mock-server-noisy-baboon-zw.cfapps.eu10.hana.ondemand.com', username: 'DUMMY', password: 'DUMMY'}]
+
+
+
+mvn clean package tomee:run
