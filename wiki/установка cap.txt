@@ -1,0 +1,5 @@
+npm set @sap:registry=https://npm.sap.com
+
+npm i -g @sap/cds-dk
+
+cds  #> test-run it

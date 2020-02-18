@@ -1,0 +1,21 @@
+enable SSH tunnel both for space and application (cf allow-space-ssh <space name> and cf enable-ssh <app name>). You may also need to restart deployed application.
+run the jvmmon for container (cf ssh <app name> -c "app/META-INF/.sap_java_buildpack/sapjvm/bin/jvmmon")
+in the opened CLI enter start debugging
+(OPTIONAL) print debugging information to verify, then q to exit
+open the ssh tunnel cf ssh <app name> -N -T -L 8000:127.0.0.1:8000.
+connect via IDE at port 8000
+Application running on Java JVM 
+
+enable SSH tunnel both for space and application (cf allow-space-ssh <space name> and cf enable-ssh <app name>). You may also need to restart deployed application.
+To open the debugging port, you need to configure the JAVA_OPTS parameter in your JVM. From the cf CLI, execute cf set-env <app name> JAVA_OPTS '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000'
+open the ssh tunnel cf ssh <app name> -N -T -L 8000:127.0.0.1:8000.
+connect via IDE at port 8000
+
+
+
+cf allow-space-ssh dev
+cf enable-ssh  test-address-manager
+restart deployed application
+cf ssh  test-address-manager -c "app/META-INF/.sap_java_buildpack/sapjvm/bin/jvmmon"
+start debugging
+cf ssh  test-address-manager -N -T -L 8000:127.0.0.1:8000

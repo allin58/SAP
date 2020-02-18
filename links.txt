@@ -53,6 +53,18 @@ https://cockpit.hanatrial.ondemand.com/cockpit/
 #Manifest for cloud
 https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html
 
+#!tutorials
+https://sapyard.com/category/tutorial/
+
+#Plugins for  cf-cli  (multiapps для push -> deploy)
+https://plugins.cloudfoundry.org/
+
+
+#MTAR
+https://sap.github.io/cloud-mta-build-tool/
+https://sap.github.io/cloud-mta-build-tool/download/ - install
+https://sap.github.io/cloud-mta-build-tool/makefile/
+
 
 
 
