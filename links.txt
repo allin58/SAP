@@ -66,9 +66,17 @@ https://sap.github.io/cloud-mta-build-tool/download/ - install
 https://sap.github.io/cloud-mta-build-tool/makefile/
 
 
+#vdm generator
+https://blogs.sap.com/2018/04/30/deep-dive-10-with-sap-s4hana-cloud-sdk-generating-java-vdm-for-s4hana-custom-odata-service/
+
+# Test api  API_BUSINESS_PARTNER
+https://api.sap.com/api/API_BUSINESS_PARTNER/resource
+
+#convert edmx to csn
+https://help.sap.com/viewer/4505d0bdaf4948449b7f7379d24d0f0d/2.0.04/en-US/54513272339246049bf438a03a8095e4.html#loio54513272339246049bf438a03a8095e4__section_lrt_rys_pgb
 
 
-
-
+#cds heloworld
+https://cap.cloud.sap/docs/get-started/in-a-nutshell
 
 

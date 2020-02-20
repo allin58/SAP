@@ -1,0 +1,18 @@
+https://cap.cloud.sap/docs/advanced/deploy-to-cloud
+
+ to package.json 
+"cds": {
+  "requires": {
+      "db": {
+        "kind": "hana",
+        "model": ["db","srv"]
+      }
+  }
+}
+
+  npm add @sap/hana-client
+cf create-service hana hdi-shared bookshop-db-hdi-container
+
+cds build/all
+cf push -f gen/db
+cf push -f gen/srv --random-route
