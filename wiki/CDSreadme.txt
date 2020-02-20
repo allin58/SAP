@@ -15,4 +15,19 @@ cds init bookshop && cd bookshop
 cds build
 cds watch
 
+cds srv/cat-service.cds -2 edmx -> генерит metadata csn
+
+
+деплой на локальной базе
+npm add sqlite3 -D
+cds deploy --to sqlite:my.db
+
+
+деплой на HANA
+
+
+
+
+
+
 
