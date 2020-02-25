@@ -12,6 +12,7 @@ https://open.sap.com/courses/s4h13/items/FVZzb3eSpv5WyRGKrfSWd
 
 #Generator edmx
 https://blogs.sap.com/2018/04/12/sap-s4hana-cloud-sdk-version-1.10.0-is-available/ 
+https://blogs.sap.com/2018/04/30/deep-dive-10-with-sap-s4hana-cloud-sdk-generating-java-vdm-for-s4hana-custom-odata-service/
 
 #Mock buisnesPartner
 https://sap.github.io/cloud-s4-sdk-book/pages/mock-odata.html
@@ -63,7 +64,10 @@ https://plugins.cloudfoundry.org/
 #MTAR
 https://sap.github.io/cloud-mta-build-tool/
 https://sap.github.io/cloud-mta-build-tool/download/ - install
-https://sap.github.io/cloud-mta-build-tool/makefile/
+https://sap.github.io/cloud-mta-build-tool/makefile/        нужно добавить переменную среды + изменить имя 
+
+#deploying MTAR
+https://blogs.sap.com/2018/05/03/deploying-a-mtar-application-on-sap-cloud-platform-cloud-foundry-account-with-a-dedicated-hana-database-and-multiple-tenant-databases/
 
 
 #vdm generator
@@ -78,6 +82,9 @@ https://help.sap.com/viewer/4505d0bdaf4948449b7f7379d24d0f0d/2.0.04/en-US/545132
 
 #cds heloworld
 https://cap.cloud.sap/docs/get-started/in-a-nutshell
+
+#на русском
+https://sapland.ru/kb/articles/spj/modeli-programmirovaniya-na-abap-dlya-sap-fiori.html
 
 
 

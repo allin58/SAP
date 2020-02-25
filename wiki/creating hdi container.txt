@@ -1,0 +1,2 @@
+cf create-service hanatrial hdi-shared bookshop-db-hdi-container
+cf create-service hana hdi-shared bookshop-db-hdi-container

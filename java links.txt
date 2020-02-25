@@ -1,0 +1,226 @@
+https://shipilev.net/blog/2014/jmm-pragmatics/
+https://docs.oracle.com/javase/specs/jls/se11/html/jls-17.html#jls-17.1
+https://www.oracle.com/technetwork/graalvm/overview/index.html
+
+
+Topic 1
+Fundamentals: JDK, JRE, JVM
+JDK & JRE. Difference;
+What is OpenJDK. Difference between Oracle JDK and Open JDK;
+JVM versions;
+HotSpot, GraalVM;
+JVM Options (Flags);
+Common JDK Tools;
+javac, java, jar, Javadoc, visualVM;
+main() method;
+Compile and run Java application;
+Compilation of inner classes;
+Path vs Classpath vs Sourcepath;
+Compiler vs Interpreter;
+JIT compilation;
+Ahead-of-Time compilation.
+Links:
+
+https://www.oracle.com/technetwork/graalvm/overview/index.html
+
+https://www.oracle.com/technetwork/articles/java/vmoptions-jsp-140102.html
+
+https://www.oracle.com/technetwork/java/compile-136656.html
+
+https://www.oracle.com/technical-resources/articles/java/architect-evans-pt1.html
+
+Topic 2
+Classloading in java
+What is a ClassLoader and how it works?.
+Purpose of loading, loading from/to, what data is loaded and where stored(method area in book)?
+.class file structure.
+lang.Classloader overview
+Types of built-in ClassLoaders
+Classloading flow.
+What triggers loading. Static/dynamic loading
+Delegation model
+Phases of loading
+Unloading of classes
+Classloading exceptions.
+
+
+Links:
+
+            https://blogs.oracle.com/sundararajan/understanding-java-class-loading
+
+            https://docs.oracle.com/javase/tutorial/ext/basics/index.html
+
+            https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.1
+
+Topic 3
+Java Memory Model Overview
+Java Stack Memory;
+Java Stack Memory Errors;
+Java Heap Space;
+Java Heap for short and long lived objects (YoungGen & OldGen spaces)
+Java Heap Space Errors;
+Difference between Heap and Stack;
+Constant pool;
+String pool;
+Int pool;
+Method Area;
+PC Registers;
+Native Method Stack;
+PermGen vs Metaspace;
+JVM options to maintain memory size.
+Links:
+
+http://tutorials.jenkov.com/java-concurrency/java-memory-model.html
+
+Topic 4
+Garbage Collection
+Overview(What is GC, what problems it solves)
+GC classic algorithms
+Mark-sweep
+Mark-sweep-compact
+Mark-copy
+GC in java
+Serial / parallel(old, new)
+CMS (overview)
+G1
+Epsilon/ ZGC / Shenandoah (overview)
+Object Lifecycle
+Instantiation
+Finalization
+Reference types
+Links:
+
+https://plumbr.io/java-garbage-collection-handbook
+
+Topic 5
+Java8 Lesson 1
+Lambdas. Method references.
+What is lambda expression, syntax.
+Lambdas under the hood. Lambdas vs Anonymous classes
+What is method reference. Method reference types.
+Build-In Functional Interfaces.
+Additions to interfaces
+Default methods(overview, resolution rules)
+Static methods
+Java8 Lesson 2
+Optional.
+Purpose.
+Working with Optional.
+Date/Time API
+Overview old date/time api (before java8).
+LocalDate, LocalTime, Instant, Duration, Period
+TemporalAdjuster, working with different timezones and calendars
+Streams (excluding parallel streams).
+What is stream. Types of stream operations.
+How to create and use stream. Stream methods.
+Collectors.
+Links:
+
+https://dzone.com/articles/jλvλ-8-a-comprehensive-look
+
+http://cr.openjdk.java.net/~briangoetz/lambda/lambda-translation.html
+
+https://www.oracle.com/technetwork/articles/java/jf14-date-time-2125367.html
+
+https://annimon.com/article/2778
+
+Topic 6
+Exceptions
+Exceptions hierarchy;
+Difference between Error and Exception;
+Common error examples (OutOfMemoryError, StackOverflowError);
+Checked vs. Runtime (Unchecked) Exceptions;
+Common examples for Checked and Unchecked Exceptions;
+When to use Checked/Unchecked exception;
+Java error handling mechanism;
+Try-Catch-Finally block structure;
+Multi-catch;
+Throw keyword;
+Try-with-resources and auto-closeable;
+User defined exception;
+Stack Trace;
+Dump files and how to read them;
+What is the exception handling best practices?
+Topic 7
+Generics
+Introduction
+Generics definition? Where to use them?
+Benefits
+Syntax
+Bounds and Wildcards
+Upper/Lower bounds, syntax
+PECS
+Type Erasure
+Restrictions on generics
+Links:
+
+https://docs.oracle.com/javase/tutorial/java/generics/index.html
+
+https://www.oreilly.com/library/view/java-generics-and/0596527756
+
+Topic 8
+Collections
+Big-O notation
+Definition
+Common functions for measuring algorithms complexity
+Comparator/Comparable
+How to create custom comparator
+Collections
+Collections hierarchy
+Inner structure(Maps, Sets, Lists)
+Enum collections
+Iterator, Iterable, Spliterator
+Purpose, methods
+ArrayList iterator structure.
+Fail-fast/Fail-safe iterators
+Links:
+
+https://www.oreilly.com/library/view/java-generics-and/0596527756
+
+Topic 9
+Processes and Threads 1
+Processes and Threads;
+Планировщик потоков;
+Concurrency vs Parallelism;
+Multithreading code problems (visibility, race conditions) // podymoi
+Thread Safe Code;
+Immutable objects
+Java Thread API
+Creating Threads (thread, callable, runnable);
+Thread Types;
+Thread priorities;
+Thread methods;
+Synchronization mechanism;
+Monitor;
+Object Methods;
+Synchronized block vs Synchronized Method (static/non static);
+Thread States;
+Exceptions handling.
+Links:
+
+https://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html
+
+http://tutorials.jenkov.com/java-concurrency/index.html
+
+Processes and Threads 2
+Concurrent package overview
+Blocking and non-blocking algorithms
+Lock (Reentrant lock) vs Synchronized Blocks
+Concurrent collections
+Signaling
+Happens-before Order.
+Compare and Swap
+Atomics (atomicity/long)
+Threading problems;
+Deadlock and how to prevent them;
+Livelock;
+Optimistic Lock;
+Thread Starvation;
+Links:
+
+https://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html http://tutorials.jenkov.com/java-concurrency/index.html
+https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/package-summary.html
+
+Topic 10
+
+

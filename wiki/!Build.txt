@@ -1,0 +1,23 @@
+"cds": {
+  "requires": {
+      "db": {
+        "kind": "hana",
+        "model": ["db","srv"]
+      }
+  }
+}
+///////////////////////////////////////////
+  npm add @sap/hana-client
+/////////////////////////////////////////////
+выполнять в папке проекта
+cf create-service hanatrial hdi-shared bookshop-db-hdi-container
+или
+cf create-service hana hdi-shared bookshop-db-hdi-container
+//////////////////////////////////////////////////
+cds build/all    - создаётся папка gen, в ней манифесты ссылаются на hdi контенер /название папки в которой лежит проект/-db-hdi-container
+
+cf push -f gen/db
+cf push -f gen/srv --random-route
+
+//////////////////////////////////
+(npm install hdb) if error hdb
