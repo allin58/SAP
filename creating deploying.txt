@@ -1,0 +1,8 @@
+создать в webIDE шаблон (CF Buisneess app  )
+добавить свои (cds)
+для сборки mtar - build-mta
+для деплоя в облаке - cf deploy "****.mtar"
+
+
+
+для service - consuner нужно получить VDM(edmx) +  csn. длобавить папку srv/external/csn  srv/external/edmx 

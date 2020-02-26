@@ -1,0 +1,324 @@
+{
+  "definitions": {
+    "CatalogService": {
+      "kind": "service",
+      "@source": "srv/cat-service.cds"
+    },
+    "CatalogService.Pilot": {
+      "kind": "entity",
+      "@cds.persistence.name": "CATALOGSERVICE_PILOT",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "modifiedAt": {
+          "@cds.persistence.name": "MODIFIEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdAt": {
+          "@cds.persistence.name": "CREATEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.persistence.name": "CREATEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@cds.persistence.name": "MODIFIEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "name": {
+          "@cds.persistence.name": "NAME",
+          "type": "cds.String",
+          "length": 111
+        },
+        "dateOfBirth": {
+          "@cds.persistence.name": "DATEOFBIRTH",
+          "type": "cds.Date"
+        },
+        "placeOfBirth": {
+          "@cds.persistence.name": "PLACEOFBIRTH",
+          "type": "cds.LargeString"
+        }
+      }
+    },
+    "CatalogService.Pilots": {
+      "kind": "entity",
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.InsertRestrictions.Insertable": false,
+      "@Capabilities.UpdateRestrictions.Updatable": false,
+      "@cds.persistence.name": "CATALOGSERVICE_PILOTS",
+      "@cds.persistence.skip": true,
+      "@readonly": true,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "CatalogService.Pilot"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "modifiedAt": {
+          "@cds.persistence.name": "MODIFIEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdAt": {
+          "@cds.persistence.name": "CREATEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.persistence.name": "CREATEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@cds.persistence.name": "MODIFIEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "name": {
+          "@cds.persistence.name": "NAME",
+          "type": "cds.String",
+          "length": 111
+        },
+        "dateOfBirth": {
+          "@cds.persistence.name": "DATEOFBIRTH",
+          "type": "cds.Date"
+        },
+        "placeOfBirth": {
+          "@cds.persistence.name": "PLACEOFBIRTH",
+          "type": "cds.LargeString"
+        }
+      },
+      "$syntax": "projection"
+    },
+    "CatalogService.Plane": {
+      "kind": "entity",
+      "@cds.persistence.name": "CATALOGSERVICE_PLANE",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "modifiedAt": {
+          "@cds.persistence.name": "MODIFIEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdAt": {
+          "@cds.persistence.name": "CREATEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.persistence.name": "CREATEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@cds.persistence.name": "MODIFIEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@cds.persistence.name": "DESCR",
+          "type": "cds.String",
+          "length": 1111
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "CatalogService.Plane_texts",
+          "keys": [
+            {
+              "ref": [
+                "locale"
+              ],
+              "$generatedFieldName": "texts_locale"
+            },
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "texts_ID"
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "CatalogService.Plane_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "texts_locale": {
+          "@cds.persistence.name": "TEXTS_LOCALE",
+          "@odata.foreignKey4": "texts",
+          "type": "cds.String",
+          "length": 5
+        },
+        "texts_ID": {
+          "@cds.persistence.name": "TEXTS_ID",
+          "@odata.foreignKey4": "texts",
+          "type": "cds.Integer"
+        }
+      }
+    },
+    "CatalogService.Plane_texts": {
+      "kind": "entity",
+      "@cds.persistence.name": "CATALOGSERVICE_PLANE_TEXTS",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "locale": {
+          "@cds.persistence.name": "LOCALE",
+          "key": true,
+          "type": "cds.String",
+          "length": 5
+        },
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "descr": {
+          "@cds.persistence.name": "DESCR",
+          "type": "cds.String",
+          "length": 1111
+        }
+      }
+    },
+    "CatalogService.Planes": {
+      "kind": "entity",
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.InsertRestrictions.Insertable": false,
+      "@Capabilities.UpdateRestrictions.Updatable": false,
+      "@cds.persistence.name": "CATALOGSERVICE_PLANES",
+      "@cds.persistence.skip": true,
+      "@readonly": true,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "CatalogService.Plane"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "modifiedAt": {
+          "@cds.persistence.name": "MODIFIEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdAt": {
+          "@cds.persistence.name": "CREATEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.persistence.name": "CREATEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@cds.persistence.name": "MODIFIEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@cds.persistence.name": "DESCR",
+          "type": "cds.String",
+          "length": 1111
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "CatalogService.Plane_texts",
+          "keys": [
+            {
+              "ref": [
+                "locale"
+              ],
+              "$generatedFieldName": "texts_locale"
+            },
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "texts_ID"
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "CatalogService.Plane_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "texts_locale": {
+          "@cds.persistence.name": "TEXTS_LOCALE",
+          "@odata.foreignKey4": "texts",
+          "type": "cds.String",
+          "length": 5
+        },
+        "texts_ID": {
+          "@cds.persistence.name": "TEXTS_ID",
+          "@odata.foreignKey4": "texts",
+          "type": "cds.Integer"
+        }
+      },
+      "$syntax": "projection"
+    }
+  },
+  "meta": {
+    "creator": "CDS Compiler v1.21.1"
+  },
+  "$version": "1.0",
+  "@sql_mapping": "plain"
+}

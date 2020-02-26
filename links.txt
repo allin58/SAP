@@ -6,6 +6,9 @@ https://habr.com/ru/company/sap/blog/350690/
 https://open.sap.com/courses/cp5
 https://github.com/SAP-samples/cloud-cap-walkthroughs/tree/master/exercises-java
 
+## Calling an OData Service with the Virtual Data Model
+https://blogs.sap.com/2017/05/21/step-4-with-sap-s4hana-cloud-sdk-calling-an-odata-service/
+
 
 #S/4HANA course
 https://open.sap.com/courses/s4h13/items/FVZzb3eSpv5WyRGKrfSWd
@@ -42,6 +45,10 @@ https://developers.sap.com/tutorial-navigator.html
 
 #Annotations
 https://help.sap.com/doc/95d074a0671142da8dde4e6a29e622a9/Cloud/en-US/com/sap/cloud/sdk/service/prov/api/annotations/package-summary.html
+https://help.sap.com/doc/95d074a0671142da8dde4e6a29e622a9/Cloud/en-US/com/sap/cloud/sdk/service/prov/api/operations/package-summary.html
+https://help.sap.com/doc/95d074a0671142da8dde4e6a29e622a9/Cloud/en-US/com/sap/cloud/sdk/odatav2/connectivity/package-summary.html
+
+
 
 
 #About OData

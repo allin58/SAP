@@ -19,3 +19,9 @@ restart deployed application
 cf ssh  test-address-manager -c "app/META-INF/.sap_java_buildpack/sapjvm/bin/jvmmon"
 start debugging
 cf ssh  test-address-manager -N -T -L 8000:127.0.0.1:8000
+///////////////////////////////////////////////////////////////////////////
+
+cf enable-ssh AirportConsumer-srv
+
+cf ssh  AirportConsumer-srv -c "app/META-INF/.sap_java_buildpack/sapjvm/bin/jvmmon"
+cf ssh  AirportConsumer-srv -N -T -L 8000:127.0.0.1:8000

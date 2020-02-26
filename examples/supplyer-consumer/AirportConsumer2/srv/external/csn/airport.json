@@ -1,0 +1,110 @@
+{
+    "definitions": {
+        "CatalogService.Pilot": {
+            "kind": "entity",
+            "@cds.persistence.skip": true,
+            "elements": {
+                "ID": {
+                    "key": true,
+                    "type": "cds.Integer"
+                },
+                "modifiedAt": {
+                    "type": "cds.Timestamp"
+                },
+                "createdAt": {
+                    "type": "cds.Timestamp"
+                },
+                "createdBy": {
+                    "type": "cds.String",
+                    "length": 255
+                },
+                "modifiedBy": {
+                    "type": "cds.String",
+                    "length": 255
+                },
+                "name": {
+                    "type": "cds.String",
+                    "length": 111
+                },
+                "dateOfBirth": {
+                    "type": "cds.Date"
+                },
+                "placeOfBirth": {
+                    "type": "cds.LargeString"
+                }
+            }
+        },
+        "CatalogService.Plane": {
+            "kind": "entity",
+            "@cds.persistence.skip": true,
+            "elements": {
+                "ID": {
+                    "key": true,
+                    "type": "cds.Integer"
+                },
+                "modifiedAt": {
+                    "type": "cds.Timestamp"
+                },
+                "createdAt": {
+                    "type": "cds.Timestamp"
+                },
+                "createdBy": {
+                    "type": "cds.String",
+                    "length": 255
+                },
+                "modifiedBy": {
+                    "type": "cds.String",
+                    "length": 255
+                },
+                "descr": {
+                    "type": "cds.String",
+                    "length": 1111
+                },
+                "texts": {
+                    "type": "cds.Association",
+                    "target": "CatalogService.Plane_texts",
+                    "cardinality": {
+                        "max": "*"
+                    }
+                },
+                "localized": {
+                    "type": "cds.Association",
+                    "target": "CatalogService.Plane_texts",
+                    "on": [
+                        {
+                            "ref": [
+                                "localized",
+                                "ID"
+                            ]
+                        },
+                        "=",
+                        {
+                            "ref": [
+                                "ID"
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "CatalogService.Plane_texts": {
+            "kind": "entity",
+            "@cds.persistence.skip": true,
+            "elements": {
+                "locale": {
+                    "key": true,
+                    "type": "cds.String",
+                    "length": 5
+                },
+                "ID": {
+                    "key": true,
+                    "type": "cds.Integer"
+                },
+                "descr": {
+                    "type": "cds.String",
+                    "length": 1111
+                }
+            }
+        }
+    }
+}

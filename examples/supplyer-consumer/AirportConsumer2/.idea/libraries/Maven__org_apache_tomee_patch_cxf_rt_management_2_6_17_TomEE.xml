@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.apache.tomee.patch:cxf-rt-management:2.6.17-TomEE">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomee/patch/cxf-rt-management/2.6.17-TomEE/cxf-rt-management-2.6.17-TomEE.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomee/patch/cxf-rt-management/2.6.17-TomEE/cxf-rt-management-2.6.17-TomEE-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomee/patch/cxf-rt-management/2.6.17-TomEE/cxf-rt-management-2.6.17-TomEE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

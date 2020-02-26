@@ -1,0 +1,35 @@
+ID: AirportConsumer
+_schema-version: "2.1"
+version: 0.0.1
+modules:
+  - name: AirportConsumer-srv
+    type: java
+    path: srv
+    parameters:
+      memory: 1024M
+    properties:
+      ALLOW_MOCKED_AUTH_HEADER: true
+    provides:
+      - name: srv_api
+        properties:
+          url: ${default-url}
+    requires:
+      - name: airport-destination
+      - name: xsuaa-airport
+
+resources:
+  - name: airport-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+       service: destination
+       service-plan: lite
+
+  - name: xsuaa-airport
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      config:
+          xsappname: xsuaa-airport-${space}
+          tenant-mode: dedicated
+
