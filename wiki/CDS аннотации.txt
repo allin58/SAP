@@ -1,0 +1,18 @@
+service AdminService @(_requires:'authenticated-user')
+
+@path:'/browse'
+service CatalogService
+
+ @readonly entity Books as SELECT from my.Books 
+
+ @requires_: 'authenticated-user'
+
+@insertonly entity Orders as projection on my.Orders;
+
+
+поже это одно и тоже
+entity Airports as projection on api.Airport;
+entity Airports2 as SELECT from api.Airport;
+
+так можно исключать
+entity Airports2 as SELECT from api.Airport excluding { createdBy, modifiedBy,city };

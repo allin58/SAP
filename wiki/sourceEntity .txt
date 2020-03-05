@@ -1,0 +1,18 @@
+https://blogs.sap.com/2018/03/15/sap-cloud-platform-sdk-for-service-development-create-odata-service-6-navigation/
+
+	
+	/* NAVIGATION */
+	
+	// Navigation from one person to one Job 
+	// Example URI: srv/people(1)/Occupation
+	@Read(serviceName = "DemoService", entity = "Jobs", sourceEntity = "People")
+	public ReadResponse getJobForPerson(ReadRequest request) {
+		
+		Integer personId = (Integer) request.getSourceKeys().get("PersonId");
+		Map<String, Object> personMap = findPerson(personId);
+		
+		Integer jobId = (Integer) personMap.get("JobId");
+		Map<String, Object> jobMap = findJob(jobId);
+		
+		return ReadResponse.setSuccess().setData(jobMap).response();
+	}	

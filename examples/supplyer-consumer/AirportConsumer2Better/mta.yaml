@@ -1,0 +1,52 @@
+ID: AirportConsumer
+_schema-version: "2.1"
+version: 0.0.1
+modules:
+  - name: AirportConsumer-db
+    type: hdb
+    path: db
+    parameters:
+      memory: 256M
+      disk-quota: 256M
+    requires:
+      - name: AirportConsumer-db-hdi-container
+  - name: AirportConsumer-srv
+    type: java
+    path: srv
+    parameters:
+      memory: 1024M
+    properties:
+      ALLOW_MOCKED_AUTH_HEADER: true
+    provides:
+      - name: srv_api
+        properties:
+          url: ${default-url}
+    requires:
+      - name: airport-destination
+      - name: xsuaa-airport
+      - name: AirportConsumer-db-hdi-container
+        properties:
+          JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml:
+                  {"service_name_for_DefaultDB" : "~{hdi-container-name}"}]'
+
+resources:
+  - name: AirportConsumer-db-hdi-container
+    type: com.sap.xs.hdi-container
+    properties:
+      hdi-container-name: ${service-name}
+
+  - name: airport-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+
+  - name: xsuaa-airport
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      config:
+        xsappname: xsuaa-airport-${space}
+        tenant-mode: dedicated
+

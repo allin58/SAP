@@ -1,0 +1,1635 @@
+{
+  "namespace": "sap.capire.airport",
+  "definitions": {
+    "AirPortService": {
+      "kind": "service",
+      "@source": "srv/cat-service.cds"
+    },
+    "AirPortService.Airports": {
+      "kind": "entity",
+      "@cds.persistence.name": "AIRPORTSERVICE_AIRPORTS",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "sap.capire.airport.Airport"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "city": {
+          "@cds.persistence.name": "CITY",
+          "type": "cds.String",
+          "length": 111
+        },
+        "amount": {
+          "@cds.persistence.name": "AMOUNT",
+          "type": "cds.Integer"
+        },
+        "pilotName": {
+          "@cds.persistence.name": "PILOTNAME",
+          "type": "cds.String",
+          "length": 111
+        }
+      },
+      "$syntax": "projection"
+    },
+    "CatalogService.Pilot": {
+      "kind": "entity",
+      "@cds.persistence.name": "CATALOGSERVICE_PILOT",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "modifiedAt": {
+          "@cds.persistence.name": "MODIFIEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdAt": {
+          "@cds.persistence.name": "CREATEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.persistence.name": "CREATEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@cds.persistence.name": "MODIFIEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "name": {
+          "@cds.persistence.name": "NAME",
+          "type": "cds.String",
+          "length": 111
+        },
+        "dateOfBirth": {
+          "@cds.persistence.name": "DATEOFBIRTH",
+          "type": "cds.Date"
+        },
+        "placeOfBirth": {
+          "@cds.persistence.name": "PLACEOFBIRTH",
+          "type": "cds.LargeString"
+        }
+      }
+    },
+    "CatalogService.Plane": {
+      "kind": "entity",
+      "@cds.persistence.name": "CATALOGSERVICE_PLANE",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "modifiedAt": {
+          "@cds.persistence.name": "MODIFIEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdAt": {
+          "@cds.persistence.name": "CREATEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.persistence.name": "CREATEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@cds.persistence.name": "MODIFIEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@cds.persistence.name": "DESCR",
+          "type": "cds.String",
+          "length": 1111
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "CatalogService.Plane_texts",
+          "keys": [
+            {
+              "ref": [
+                "locale"
+              ],
+              "$generatedFieldName": "texts_locale"
+            },
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "texts_ID"
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "CatalogService.Plane_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "texts_locale": {
+          "@cds.persistence.name": "TEXTS_LOCALE",
+          "@odata.foreignKey4": "texts",
+          "type": "cds.String",
+          "length": 5
+        },
+        "texts_ID": {
+          "@cds.persistence.name": "TEXTS_ID",
+          "@odata.foreignKey4": "texts",
+          "type": "cds.Integer"
+        }
+      }
+    },
+    "CatalogService.Plane_texts": {
+      "kind": "entity",
+      "@cds.persistence.name": "CATALOGSERVICE_PLANE_TEXTS",
+      "@cds.persistence.skip": true,
+      "elements": {
+        "locale": {
+          "@cds.persistence.name": "LOCALE",
+          "key": true,
+          "type": "cds.String",
+          "length": 5
+        },
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "descr": {
+          "@cds.persistence.name": "DESCR",
+          "type": "cds.String",
+          "length": 1111
+        }
+      }
+    },
+    "CatalogService2": {
+      "kind": "service",
+      "@source": "srv/cat-service.cds"
+    },
+    "CatalogService2.CustomPilots": {
+      "kind": "entity",
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.InsertRestrictions.Insertable": false,
+      "@Capabilities.UpdateRestrictions.Updatable": false,
+      "@cds.persistence.name": "CATALOGSERVICE2_CUSTOMPILOTS",
+      "@cds.persistence.skip": true,
+      "@readonly": true,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "CatalogService.Pilot"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "modifiedAt": {
+          "@cds.persistence.name": "MODIFIEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdAt": {
+          "@cds.persistence.name": "CREATEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.persistence.name": "CREATEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@cds.persistence.name": "MODIFIEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "name": {
+          "@cds.persistence.name": "NAME",
+          "type": "cds.String",
+          "length": 111
+        },
+        "dateOfBirth": {
+          "@cds.persistence.name": "DATEOFBIRTH",
+          "type": "cds.Date"
+        },
+        "placeOfBirth": {
+          "@cds.persistence.name": "PLACEOFBIRTH",
+          "type": "cds.LargeString"
+        }
+      },
+      "$syntax": "projection"
+    },
+    "CatalogService2.EvenPilots": {
+      "kind": "entity",
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.InsertRestrictions.Insertable": false,
+      "@Capabilities.UpdateRestrictions.Updatable": false,
+      "@cds.persistence.name": "CATALOGSERVICE2_EVENPILOTS",
+      "@cds.persistence.skip": true,
+      "@readonly": true,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "CatalogService.Pilot"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "modifiedAt": {
+          "@cds.persistence.name": "MODIFIEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdAt": {
+          "@cds.persistence.name": "CREATEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.persistence.name": "CREATEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@cds.persistence.name": "MODIFIEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "name": {
+          "@cds.persistence.name": "NAME",
+          "type": "cds.String",
+          "length": 111
+        },
+        "dateOfBirth": {
+          "@cds.persistence.name": "DATEOFBIRTH",
+          "type": "cds.Date"
+        },
+        "placeOfBirth": {
+          "@cds.persistence.name": "PLACEOFBIRTH",
+          "type": "cds.LargeString"
+        }
+      },
+      "$syntax": "projection"
+    },
+    "CatalogService2.Pilots": {
+      "kind": "entity",
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.InsertRestrictions.Insertable": false,
+      "@Capabilities.UpdateRestrictions.Updatable": false,
+      "@cds.persistence.name": "CATALOGSERVICE2_PILOTS",
+      "@cds.persistence.skip": true,
+      "@readonly": true,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "CatalogService.Pilot"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "modifiedAt": {
+          "@cds.persistence.name": "MODIFIEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdAt": {
+          "@cds.persistence.name": "CREATEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.persistence.name": "CREATEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@cds.persistence.name": "MODIFIEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "name": {
+          "@cds.persistence.name": "NAME",
+          "type": "cds.String",
+          "length": 111
+        },
+        "dateOfBirth": {
+          "@cds.persistence.name": "DATEOFBIRTH",
+          "type": "cds.Date"
+        },
+        "placeOfBirth": {
+          "@cds.persistence.name": "PLACEOFBIRTH",
+          "type": "cds.LargeString"
+        }
+      },
+      "$syntax": "projection"
+    },
+    "CatalogService2.Planes": {
+      "kind": "entity",
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.InsertRestrictions.Insertable": false,
+      "@Capabilities.UpdateRestrictions.Updatable": false,
+      "@cds.persistence.name": "CATALOGSERVICE2_PLANES",
+      "@cds.persistence.skip": true,
+      "@readonly": true,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "CatalogService.Plane"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "modifiedAt": {
+          "@cds.persistence.name": "MODIFIEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdAt": {
+          "@cds.persistence.name": "CREATEDAT",
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.persistence.name": "CREATEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@cds.persistence.name": "MODIFIEDBY",
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@cds.persistence.name": "DESCR",
+          "type": "cds.String",
+          "length": 1111
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "CatalogService.Plane_texts",
+          "keys": [
+            {
+              "ref": [
+                "locale"
+              ],
+              "$generatedFieldName": "texts_locale"
+            },
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "texts_ID"
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "CatalogService.Plane_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "ID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "ID"
+              ]
+            }
+          ]
+        },
+        "texts_locale": {
+          "@cds.persistence.name": "TEXTS_LOCALE",
+          "@odata.foreignKey4": "texts",
+          "type": "cds.String",
+          "length": 5
+        },
+        "texts_ID": {
+          "@cds.persistence.name": "TEXTS_ID",
+          "@odata.foreignKey4": "texts",
+          "type": "cds.Integer"
+        }
+      },
+      "$syntax": "projection"
+    },
+    "Country": {
+      "kind": "type",
+      "@Common.Label": "{i18n>Country}",
+      "@Core.Description": "{i18n>CountryCode.Description}",
+      "@cds.persistence.name": "COUNTRY",
+      "type": "cds.Association",
+      "target": "sap.common.Countries",
+      "keys": [
+        {
+          "ref": [
+            "code"
+          ]
+        }
+      ]
+    },
+    "Currency": {
+      "kind": "type",
+      "@Common.Label": "{i18n>Currency}",
+      "@Core.Description": "{i18n>CurrencyCode.Description}",
+      "@cds.persistence.name": "CURRENCY",
+      "type": "cds.Association",
+      "target": "sap.common.Currencies",
+      "keys": [
+        {
+          "ref": [
+            "code"
+          ]
+        }
+      ]
+    },
+    "Language": {
+      "kind": "type",
+      "@Common.Label": "{i18n>Language}",
+      "@Core.Description": "{i18n>LanguageCode.Description}",
+      "@cds.persistence.name": "LANGUAGE",
+      "type": "cds.Association",
+      "target": "sap.common.Languages",
+      "keys": [
+        {
+          "ref": [
+            "code"
+          ]
+        }
+      ]
+    },
+    "User": {
+      "kind": "type",
+      "@Common.Label": "{i18n>UserID}",
+      "@Core.Description": "{i18n>UserID.Description}",
+      "@cds.persistence.name": "USER",
+      "type": "cds.String",
+      "length": 255
+    },
+    "cuid": {
+      "kind": "entity",
+      "@cds.persistence.name": "CUID",
+      "abstract": true,
+      "elements": {
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.UUID"
+        }
+      }
+    },
+    "localized.sap.common.Countries": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "=": "name"
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.name": "LOCALIZED_SAP_COMMON_COUNTRIES",
+      "@cds.persistence.skip": "if-unused",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "sap.common.Countries"
+            ],
+            "as": "L"
+          },
+          "columns": [
+            "*",
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "name"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "name"
+                  ]
+                }
+              ],
+              "as": "name"
+            },
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "descr"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "descr"
+                  ]
+                }
+              ],
+              "as": "descr"
+            }
+          ]
+        }
+      },
+      "elements": {
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@Core.Computed": true,
+          "@cds.persistence.name": "NAME",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@Core.Computed": true,
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>CountryCode}",
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Countries_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "sap.common.Countries_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "localized.sap.common.Currencies": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "=": "name"
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.name": "LOCALIZED_SAP_COMMON_CURRENCIES",
+      "@cds.persistence.skip": "if-unused",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "sap.common.Currencies"
+            ],
+            "as": "L"
+          },
+          "columns": [
+            "*",
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "name"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "name"
+                  ]
+                }
+              ],
+              "as": "name"
+            },
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "descr"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "descr"
+                  ]
+                }
+              ],
+              "as": "descr"
+            }
+          ]
+        }
+      },
+      "elements": {
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@Core.Computed": true,
+          "@cds.persistence.name": "NAME",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@Core.Computed": true,
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>CurrencyCode}",
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "symbol": {
+          "@Common.Label": "{i18n>CurrencySymbol}",
+          "@cds.persistence.name": "SYMBOL",
+          "type": "cds.String",
+          "length": 5
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "sap.common.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "localized.sap.common.Languages": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "=": "name"
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.name": "LOCALIZED_SAP_COMMON_LANGUAGES",
+      "@cds.persistence.skip": "if-unused",
+      "@odata.draft.enabled": false,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "sap.common.Languages"
+            ],
+            "as": "L"
+          },
+          "columns": [
+            "*",
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "name"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "name"
+                  ]
+                }
+              ],
+              "as": "name"
+            },
+            {
+              "func": "coalesce",
+              "args": [
+                {
+                  "ref": [
+                    "L",
+                    "localized",
+                    "descr"
+                  ]
+                },
+                {
+                  "ref": [
+                    "L",
+                    "descr"
+                  ]
+                }
+              ],
+              "as": "descr"
+            }
+          ]
+        }
+      },
+      "elements": {
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@Core.Computed": true,
+          "@cds.persistence.name": "NAME",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@Core.Computed": true,
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>LanguageCode}",
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 14
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Languages_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "sap.common.Languages_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "managed": {
+      "kind": "type",
+      "@cds.persistence.name": "MANAGED",
+      "elements": {
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        }
+      }
+    },
+    "sap.capire.airport.Airport": {
+      "kind": "entity",
+      "@cds.persistence.name": "SAP_CAPIRE_AIRPORT_AIRPORT",
+      "includes": [
+        "managed"
+      ],
+      "elements": {
+        "modifiedAt": {
+          "@Common.Label": "{i18n>ChangedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "MODIFIEDAT",
+          "@odata.on.update": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdAt": {
+          "@Common.Label": "{i18n>CreatedAt}",
+          "@Core.Computed": true,
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.persistence.name": "CREATEDAT",
+          "@odata.on.insert": {
+            "#": "now"
+          },
+          "type": "cds.DateTime"
+        },
+        "createdBy": {
+          "@Common.Label": "{i18n>CreatedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "CREATEDBY",
+          "@odata.on.insert": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "modifiedBy": {
+          "@Common.Label": "{i18n>ChangedBy}",
+          "@Core.Computed": true,
+          "@Core.Description": "{i18n>UserID.Description}",
+          "@Core.Immutable": true,
+          "@UI.HiddenFilter": true,
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@cds.persistence.name": "MODIFIEDBY",
+          "@odata.on.update": {
+            "#": "user"
+          },
+          "type": "cds.String",
+          "length": 255
+        },
+        "ID": {
+          "@cds.persistence.name": "ID",
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "city": {
+          "@cds.persistence.name": "CITY",
+          "type": "cds.String",
+          "length": 111
+        },
+        "amount": {
+          "@cds.persistence.name": "AMOUNT",
+          "type": "cds.Integer"
+        },
+        "pilotName": {
+          "@cds.persistence.name": "PILOTNAME",
+          "type": "cds.String",
+          "length": 111
+        }
+      }
+    },
+    "sap.common": {
+      "kind": "context"
+    },
+    "sap.common.CodeList": {
+      "kind": "type",
+      "@UI.Identification": [
+        {
+          "=": "name"
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.name": "SAP_COMMON_CODELIST",
+      "@cds.persistence.skip": "if-unused",
+      "elements": {
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@cds.persistence.name": "NAME",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        }
+      }
+    },
+    "sap.common.Countries": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "=": "name"
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.name": "SAP_COMMON_COUNTRIES",
+      "@cds.persistence.skip": "if-unused",
+      "includes": [
+        "sap.common.CodeList"
+      ],
+      "elements": {
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@cds.persistence.name": "NAME",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>CountryCode}",
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Countries_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "sap.common.Countries_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.Countries_texts": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.persistence.name": "SAP_COMMON_COUNTRIES_TEXTS",
+      "@odata.draft.enabled": false,
+      "elements": {
+        "locale": {
+          "@cds.persistence.name": "LOCALE",
+          "key": true,
+          "type": "cds.String",
+          "length": 5
+        },
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@cds.persistence.name": "NAME",
+          "localized": false,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@cds.persistence.name": "DESCR",
+          "localized": false,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>CountryCode}",
+          "@cds.odata.v4.ignore": true,
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "sap.common.Currencies": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "=": "name"
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.name": "SAP_COMMON_CURRENCIES",
+      "@cds.persistence.skip": "if-unused",
+      "includes": [
+        "sap.common.CodeList"
+      ],
+      "elements": {
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@cds.persistence.name": "NAME",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>CurrencyCode}",
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        },
+        "symbol": {
+          "@Common.Label": "{i18n>CurrencySymbol}",
+          "@cds.persistence.name": "SYMBOL",
+          "type": "cds.String",
+          "length": 5
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "sap.common.Currencies_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.Currencies_texts": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.persistence.name": "SAP_COMMON_CURRENCIES_TEXTS",
+      "@odata.draft.enabled": false,
+      "elements": {
+        "locale": {
+          "@cds.persistence.name": "LOCALE",
+          "key": true,
+          "type": "cds.String",
+          "length": 5
+        },
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@cds.persistence.name": "NAME",
+          "localized": false,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@cds.persistence.name": "DESCR",
+          "localized": false,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>CurrencyCode}",
+          "@cds.odata.v4.ignore": true,
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "sap.common.Languages": {
+      "kind": "entity",
+      "@UI.Identification": [
+        {
+          "=": "name"
+        }
+      ],
+      "@cds.autoexpose": true,
+      "@cds.odata.valuelist": true,
+      "@cds.persistence.name": "SAP_COMMON_LANGUAGES",
+      "@cds.persistence.skip": "if-unused",
+      "includes": [
+        "sap.common.CodeList"
+      ],
+      "elements": {
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@cds.persistence.name": "NAME",
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@cds.persistence.name": "DESCR",
+          "localized": true,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>LanguageCode}",
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 14
+        },
+        "texts": {
+          "@cds.persistence.name": "TEXTS",
+          "type": "cds.Composition",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "sap.common.Languages_texts",
+          "on": [
+            {
+              "ref": [
+                "texts",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            }
+          ]
+        },
+        "localized": {
+          "@cds.persistence.name": "LOCALIZED",
+          "type": "cds.Association",
+          "target": "sap.common.Languages_texts",
+          "on": [
+            {
+              "ref": [
+                "localized",
+                "code"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "code"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "localized",
+                "locale"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$user",
+                "locale"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "sap.common.Languages_texts": {
+      "kind": "entity",
+      "@cds.autoexpose": true,
+      "@cds.persistence.name": "SAP_COMMON_LANGUAGES_TEXTS",
+      "@odata.draft.enabled": false,
+      "elements": {
+        "locale": {
+          "@cds.persistence.name": "LOCALE",
+          "key": true,
+          "type": "cds.String",
+          "length": 5
+        },
+        "name": {
+          "@Common.Label": "{i18n>Name}",
+          "@cds.persistence.name": "NAME",
+          "localized": false,
+          "type": "cds.String",
+          "length": 255
+        },
+        "descr": {
+          "@Common.Label": "{i18n>Description}",
+          "@cds.persistence.name": "DESCR",
+          "localized": false,
+          "type": "cds.String",
+          "length": 1000
+        },
+        "code": {
+          "@Common.Label": "{i18n>LanguageCode}",
+          "@cds.odata.v4.ignore": true,
+          "@cds.persistence.name": "CODE",
+          "key": true,
+          "type": "cds.String",
+          "length": 14
+        }
+      }
+    },
+    "temporal": {
+      "kind": "type",
+      "@cds.persistence.name": "TEMPORAL",
+      "elements": {
+        "validFrom": {
+          "@cds.persistence.name": "VALIDFROM",
+          "@cds.valid.from": true,
+          "type": "cds.DateTime"
+        },
+        "validTo": {
+          "@cds.persistence.name": "VALIDTO",
+          "@cds.valid.to": true,
+          "type": "cds.DateTime"
+        }
+      }
+    }
+  },
+  "meta": {
+    "creator": "CDS Compiler v1.21.1"
+  },
+  "$version": "1.0",
+  "@sql_mapping": "plain"
+}

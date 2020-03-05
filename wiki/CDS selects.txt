@@ -1,0 +1,5 @@
+entity Airports2 as SELECT from api.Airport { ID,city};
+entity Airports2 as SELECT from api.Airport {*};
+entity Airports2 as SELECT from api.Airport {*} excluding { createdBy, modifiedBy,city }
+entity Airports2 as SELECT from api.Airport where ID >5;
+entity Airports2 as SELECT from api.Airport {ID,city as citty};

@@ -1,0 +1,114 @@
+package com.burberry.pptl.odata.po.manage.service.helpers;
+
+import com.google.common.collect.Lists;
+import com.sap.cloud.sdk.odatav2.connectivity.FilterExpression;
+import com.sap.cloud.sdk.odatav2.connectivity.ODataQuery;
+import com.sap.cloud.sdk.odatav2.connectivity.ODataQueryBuilder;
+import com.sap.cloud.sdk.odatav2.connectivity.filter.FilterExpressionConverter;
+import com.sap.cloud.sdk.odatav2.connectivity.filter.FilterFunctionException;
+import com.sap.cloud.sdk.service.prov.api.filter.exception.FilterOptionException;
+import com.sap.cloud.sdk.service.prov.api.filter.impl.ExpressionBuilderImpl;
+import com.sap.cloud.sdk.service.prov.api.request.OrderByExpression;
+import com.sap.cloud.sdk.service.prov.api.request.QueryRequest;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class QueryBuilder {
+
+    private static final ExpressionBuilderImpl EXPRESSION_BUILDER = new ExpressionBuilderImpl();
+    private static final String ORDER_BY_PARAM = "$orderby";
+
+    private QueryBuilder() {
+    }
+
+    public static ODataQuery buildQueryForMany(QueryRequest req, Deque<EntityHelper> helpersQueue, String destinationRelativePath) throws FilterFunctionException {
+
+        FilterExpression filters = FilterExpressionConverter.convertTo(req.getQueryExpression());              // нужно превратить в SAPовский фильтер
+
+        return ODataQueryBuilder
+                .withEntity(destinationRelativePath, helpersQueue.getFirst().getNameOnDestination())
+                .inlineCount()                                                                                 // все страницы
+                .select(handleSelects(req.getSelectProperties(), helpersQueue))                                    
+                .skip(req.getSkipOptionValue())
+                .top(req.getTopOptionValue() >= 0 ? req.getTopOptionValue() : Constants.DEFAULT_TOP_SIZE)
+                .filter(filters)
+                .param(ORDER_BY_PARAM, handleOrderBy(req.getOrderByProperties()))
+                .build();
+    }
+
+    public static ODataQuery buildQueryForManyExpanded(QueryRequest req, Deque<EntityHelper> helpersQueue, String destinationRelativePath) throws FilterFunctionException {
+
+        FilterExpression filters = FilterExpressionConverter.convertTo(req.getQueryExpression());
+
+        return ODataQueryBuilder
+                .withEntity(destinationRelativePath, helpersQueue.getFirst().getNameOnDestination())
+                .inlineCount()
+                .select(handleSelects(req.getSelectProperties(), helpersQueue))
+                .skip(req.getSkipOptionValue())
+                .top(req.getTopOptionValue() >= 0 ? req.getTopOptionValue() : Constants.DEFAULT_TOP_SIZE)
+                .filter(filters)
+                .param(ORDER_BY_PARAM, handleOrderBy(req.getOrderByProperties()))
+                .expand(Constants.ITEMS_FULL_EXPAND)
+                .build();
+    }
+
+    public static ODataQuery buildQueryForManyExpanded(QueryRequest req, FilterExpression filters, Deque<EntityHelper> helpersQueue, String destinationRelativePath) throws FilterFunctionException {
+
+        return ODataQueryBuilder
+                .withEntity(destinationRelativePath, helpersQueue.getFirst().getNameOnDestination())
+                .inlineCount()
+                .select(handleSelects(req.getSelectProperties(), helpersQueue))
+                .skip(req.getSkipOptionValue())
+                .top(req.getTopOptionValue() >= 0 ? req.getTopOptionValue() : Constants.DEFAULT_TOP_SIZE)
+                .filter(filters)
+                .param(ORDER_BY_PARAM, handleOrderBy(req.getOrderByProperties()))
+                .expand(Constants.ITEMS_FULL_EXPAND)
+                .build();
+    }
+
+    public static ODataQuery buildQueryForOne(FilterExpression filters, EntityHelper helper, String destinationRelativePath) {
+
+
+
+        return ODataQueryBuilder
+                .withEntity(destinationRelativePath, helper.getNameOnDestination())
+                .filter(filters)
+                .build();
+    }
+
+    public static ODataQuery buildQueryForOneExpanded(FilterExpression filters, EntityHelper helper, String destinationRelativePath) {
+
+        return ODataQueryBuilder
+                .withEntity(destinationRelativePath, helper.getNameOnDestination())
+                .filter(filters)
+                .expand(Constants.ITEMS_FULL_EXPAND)
+                .build();
+    }
+
+
+    public static List<String> handleSelects(List<String> selectProperties, Deque<EntityHelper> helpersQueue) {
+        Set<String> selects = new HashSet<>(selectProperties);
+        EntityHelper rootHelper = Objects.requireNonNull(helpersQueue.pollFirst());
+        if (! selects.isEmpty()) {
+            SelectsBuilder.RootedSelectsBuilder builder =  SelectsBuilder.forSelects(selects).from(rootHelper);
+            helpersQueue.forEach(builder::andThenFrom);
+
+            return Lists.newArrayList(builder.build());
+        }
+
+        return Collections.emptyList();
+    }
+
+    public static FilterExpression handleFilters(ExpressionContainer expressionContainer) throws FilterOptionException, FilterFunctionException {
+        return FilterExpressionConverter.convertTo(EXPRESSION_BUILDER.createExpression(expressionContainer.getFieldName(), expressionContainer.getOperator(), expressionContainer.getExpressionValue()));
+    }
+
+    private static String handleOrderBy(List<OrderByExpression> orderByExpressions) {
+        return orderByExpressions
+                .stream()
+                .map(orderByExpression ->  orderByExpression.isDescending()
+                        ? orderByExpression.getOrderByProperty() + " desc"
+                        : orderByExpression.getOrderByProperty() + " asc")
+                .collect(Collectors.joining(","));
+    }
+}

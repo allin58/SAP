@@ -1,0 +1,40 @@
+на облаке не отображает сущности(хотя cds watch - отображает) - возможно в package json не добавлена 
+так же нужен .cdsrc.json
+
+
+
+cds": {
+        "requires": {
+            "db": {
+                "kind": "hana",
+                "model": [
+                    "db",
+                    "srv"
+                ]
+            }
+        },
+        "odata": {
+            "version": "v2"
+        }
+    },
+ "files": [
+        "db",
+        "srv"
+    ]
+
+
+&
+
+ - name: ConsumerAirport-db
+    type: hdb
+    path: db
+    parameters:
+      memory: 256M
+      disk-quota: 256M
+    requires:
+      - name: ConsumerAirport-db-hdi-container
+
+......................................................................................................
+
+в файле mta.yaml важен порядок зависимостей, ресурсов
+

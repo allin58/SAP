@@ -1,0 +1,92 @@
+define entity Employees {
+  key ID : Integer;
+  name : String;
+  jobTitle : String;
+}
+
+//////////////////////////////////////////////////////////////////////
+
+define type User : String(111);
+define type Amount {
+  value : Decimal(10,3);
+  currency : Currency;
+}
+define type Currency : Association to Currencies;
+
+
+//////////////////////////////////////////////////////////////////////////
+структура
+type Amount {
+  value : Decimal(10,3);
+  currency : Currency;
+}
+entity Books {
+  price : Amount;
+}
+
+
+ананимная структура
+entity Books {
+  price : {
+    value : Decimal(10,3);
+    currency : Currency;
+  };
+}
+
+//////////////////////////////////////////////////////////////////////////
+
+массивы
+type EmailAddresses : array of String;
+entity Foo { emails: EmailAddresses; }
+entity Bar { emails: array of String; }
+
+//////////////////////////////////////////////////
+
+дефолтные значения
+entity Foo {
+  bar : String default 'bar';
+  boo : Integer default 1;
+}
+
+//////////////////////////////////////////////
+
+константы
+entity Employees {
+  name : String(111) not null;
+}
+
+//////////////////////////////////////////////////////
+enum
+type Gender : String enum { male; female; }
+entity Order {
+  status : Integer enum {
+    submitted = 1;
+    fulfilled = 2;
+    shipped = 3;
+    canceled = -1;
+  };
+}
+
+////////////////////////////////////////////////////////////
+
+
+ author : Association to Authors;
+
+/////////////////////////////////////////////////////////////
+ Items    : Composition of many OrderItems on Items.parent = $self;
+
+//////////////////////////////////////////////////////////////
+ books  : Association to many Books on books.author = $self;
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,7 @@
+return ReadResponse.setError(response);
+
+
+ErrorResponse response = ErrorResponse.getBuilder()
+				.setMessage("some error text")
+				.setStatusCode(404) // a valid HTTP status code
+				.response();

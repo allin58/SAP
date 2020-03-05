@@ -1,3 +1,9 @@
+# настройка mta
+https://help.sap.com/viewer/4505d0bdaf4948449b7f7379d24d0f0d/1.0.12/en-US/4050fee4c469498ebc31b10f2ae15ff2.html
+
+
+#web ide
+https://cockpit.hanatrial.ondemand.com/cockpit/#/home/trial
 
 #Helloworld
 https://habr.com/ru/company/sap/blog/350690/
@@ -54,6 +60,9 @@ https://help.sap.com/doc/95d074a0671142da8dde4e6a29e622a9/Cloud/en-US/com/sap/cl
 #About OData
 https://blogs.sap.com/2018/03/01/sap-cloud-platform-sdk-for-service-development-overview-of-blogs/
 
+#OData examples
+https://www.odata.org/documentation/odata-version-2-0/uri-conventions/ 
+
 #Cockpit
 https://cockpit.hanatrial.ondemand.com/cockpit/
 
@@ -94,7 +103,15 @@ https://cap.cloud.sap/docs/get-started/in-a-nutshell
 https://sapland.ru/kb/articles/spj/modeli-programmirovaniya-na-abap-dlya-sap-fiori.html
 
 
+#Тесты
+https://developers.sap.com/tutorials/s4sdk-odata-service-cloud-foundry.html
 
+#ExtendReadStream 
+https://answers.sap.com/questions/12968052/how-can-i-return-media-response-from-java-back-how.html
 
+#запрос к Odata через Postman
+https://blogs.sap.com/2018/03/01/sap-cloud-platform-sdk-for-service-development-create-odata-service-3-create-update-delete/
 
+#про мануал cloud foundry
+https://blogs.sap.com/2016/03/03/sap-api-management-overview-getting-started/
 

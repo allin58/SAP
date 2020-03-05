@@ -1,0 +1,8 @@
+http://localhost/odata/Products?$select=Price,Name
+GET http://localhost/odata/Categories?$expand=Products
+GET http://localhost/odata/Products(1)?$expand=Category,Supplier
+GET http://localhost/odata/Products?$select=Name,Supplier&$expand=Supplier
+
+https://services.odata.org/V2/OData/OData.svc/Categories(1)/Products(1)/Supplier/Address/City/$value
+
+https://www.odata.org/documentation/odata-version-2-0/uri-conventions/    !!!!!!!!!!!!! 

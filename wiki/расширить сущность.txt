@@ -1,0 +1,43 @@
+
+//schema.cds
+namespace sap.capire.airport;
+using { managed, cuid } from '@sap/cds/common';
+
+entity Airport: managed {
+  key ID : Integer;
+  city  : String(111);
+ 
+}
+
+//schema2.cds
+namespace sap.capire.airport;
+using { sap.capire.airport as schema } from './schema';
+
+extend schema.Airport with {
+    amount : Integer;
+}
+
+
+
+//cat-service.cds
+using {CatalogService as api } from './external/csn/airport';
+//using { sap.capire.airport as api2 } from '../db/schema';
+using { sap.capire.airport as ext} from '../db/schema2';
+
+service AirPortService {
+  entity Airports as projection on ext.Airport;
+};
+
+service CatalogService2 {
+ entity Planes @readonly as projection on api.Plane;
+ entity Pilots  @readonly as projection on api.Pilot;
+ entity EvenPilots  @readonly as projection on api.Pilot;
+ 
+}
+
+
+
+
+
+
+

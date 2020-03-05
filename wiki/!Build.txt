@@ -7,7 +7,7 @@
   }
 }
 ///////////////////////////////////////////
-  npm add @sap/hana-client
+  npm add @sap/hana-client                     возможно ещё npm install нужно сделать в папке db
 /////////////////////////////////////////////
 выполнять в папке проекта
 cf create-service hanatrial hdi-shared bookshop-db-hdi-container

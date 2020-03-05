@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.sap.cloud.servicesdk.prov:annotation-processor:1.36.1">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/sap/cloud/servicesdk/prov/annotation-processor/1.36.1/annotation-processor-1.36.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/sap/cloud/servicesdk/prov/annotation-processor/1.36.1/annotation-processor-1.36.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/sap/cloud/servicesdk/prov/annotation-processor/1.36.1/annotation-processor-1.36.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

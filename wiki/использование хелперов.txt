@@ -1,0 +1,12 @@
+ODataQuery query = service
+                .withServicePath(Constants.AFS_SERVICE_RELATIVE_PATH)
+                .getCountryByKey(countryId)
+                .select(QueryBuilder.handleSelects(req.getSelectProperties(), helpersQueue)
+                        .stream()
+                        .map(CountryField::new)
+                        .toArray(CountryField[]::new))
+                .toQuery();
+
+        Country country = query
+                .execute(new ErpConfigContext(Constants.AFS_SERVICE_DESTINATION))
+                .as(Country.class);

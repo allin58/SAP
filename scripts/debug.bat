@@ -1,0 +1,1 @@
+cf ssh sandbox.odata.po.manage -c "app/META-INF/.sap_java_buildpack/sapjvm/bin/jvmmon"

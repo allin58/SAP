@@ -131,3 +131,6 @@ cf create-service destination lite my-destination
 
 
 
+// получить лог
+cf dmol -i b70a18a9-5a10-11ea-993e-eeee0a916681
+
