@@ -1,0 +1,10 @@
+---
+erp:
+  default: "ERP_001"
+  systems:
+    - alias: "ERP_001"
+      uri: "https://p2002062544trial-dev-mockfortest-srv.cfapps.eu10.hana.ondemand.com/odata/v2"
+      systemId: "MySystemId"           # optional, defaults to ""
+      sapClient: "001"                 # optional, defaults to default SAP client
+      locale: "en"                     # optional, defaults to English (US)
+      erpEdition: "cloud"              # optional, defaults to "cloud"

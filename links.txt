@@ -106,6 +106,9 @@ https://sapland.ru/kb/articles/spj/modeli-programmirovaniya-na-abap-dlya-sap-fio
 #Тесты
 https://developers.sap.com/tutorials/s4sdk-odata-service-cloud-foundry.html
 
+#Тесты CAP
+https://blogs.sap.com/2020/02/23/integration-tests-in-a-clound-foundry-java-app-using-cloud-application-programming-model/
+
 #ExtendReadStream 
 https://answers.sap.com/questions/12968052/how-can-i-return-media-response-from-java-back-how.html
 
@@ -114,4 +117,13 @@ https://blogs.sap.com/2018/03/01/sap-cloud-platform-sdk-for-service-development-
 
 #про мануал cloud foundry
 https://blogs.sap.com/2016/03/03/sap-api-management-overview-getting-started/
+
+# Fiory аннотации 
+https://wiki.scn.sap.com/wiki/display/EmTech/SAP+Annotations+for+OData+Version+2.0
+
+# эмулятор Fiory
+https://sapui5.hana.ondemand.com/#/entity/sap.ui.comp.smarttable.SmartTable/sample/sap.ui.comp.sample.smarttable
+
+# авторизация XSUAA 
+https://blogs.sap.com/2017/07/18/step-7-with-sap-s4hana-cloud-sdk-secure-your-application-on-sap-cloud-platform-cloudfoundry/
 

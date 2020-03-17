@@ -1,0 +1,19 @@
+{
+  "welcomeFile": "/index.html",
+  "authenticationMethod": "route",
+  "logout": {
+    "logoutEndpoint": "/do/logout"
+  },
+  "routes": [{
+		"source": "^/odata/v2/NetWeightService/(.*)$",
+		"target": "NetWeightService/$1",
+		"authenticationType": "xsuaa",
+		"destination": "out-destination",
+		"csrfProtection": false
+	},{
+      "source": "^(.*)$",
+      "target": "$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "xsuaa"
+    }]
+}

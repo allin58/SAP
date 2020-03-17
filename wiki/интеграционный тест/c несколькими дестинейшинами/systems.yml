@@ -1,0 +1,8 @@
+erp:
+  default: "afsMockDestinataion"
+  systems:
+    - alias: "afsMockDestinataion"
+      uri: "https://p2002062544trial-dev-mockfortest-srv.cfapps.eu10.hana.ondemand.com/odata/v2"
+    - alias: "afsMockDestinataion2"
+      uri: "https://p2002062544trial-dev-mockfortest-srv.cfapps.eu10.hana.ondemand.com/odata/v2"
+

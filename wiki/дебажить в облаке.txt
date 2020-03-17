@@ -33,5 +33,12 @@ cf ssh  AirportConsumer-srv -N -T -L 8000:127.0.0.1:8000
 cf ssh  AfterBeforeTest-srv -c "app/META-INF/.sap_java_buildpack/sapjvm/bin/jvmmon"
 cf ssh  AfterBeforeTest-srv -T -L 8000:127.0.0.1:8000
 
+///////////////////
 
+cf allow-space-ssh dev
+cf enable-ssh NetWeights-srv
+
+cf ssh  NetWeights-srv -c "app/META-INF/.sap_java_buildpack/sapjvm/bin/jvmmon"
+start debugging
+cf ssh  NetWeights-srv -N -T -L 8000:127.0.0.1:8000
 

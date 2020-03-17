@@ -38,3 +38,26 @@ cds": {
 
 в файле mta.yaml важен порядок зависимостей, ресурсов
 
+.................................................................................................
+
+при filter запросе с несколькими параметрами нужно к экспрешену из реквеста добавить createExFactoryDateRangeFilte
+
+  Expression expression = BUILDER.createExpression(req.getQueryExpression(), AND, createExFactoryDateRangeFilter());
+
+  private static Expression createExFactoryDateRangeFilter() throws FilterOptionException {
+
+        //TODO
+        ActiveConfiguration activeConfiguration = DefaultValues.getDefaultActiveConfiguration();
+        LocalDateTime from = LocalDateTime.now().minusDays(Objects.requireNonNull(activeConfiguration.getExFactoryDateRangeFrom()));
+        LocalDateTime to = LocalDateTime.now().plusDays(Objects.requireNonNull(activeConfiguration.getExFactoryDateRangeTo()));
+
+        Expression exFactoryDateFrom = BUILDER
+                .createExpression(PurchaseOrderHead.EX_FACTORY_DATE_STATUS.getFieldName(), GT, from.atZone(ZoneOffset.UTC).toInstant().toEpochMilli());
+        Expression exFactoryDateTo = BUILDER
+                .createExpression(PurchaseOrderHead.EX_FACTORY_DATE_STATUS.getFieldName(), LT, to.atZone(ZoneOffset.UTC).toInstant().toEpochMilli());
+
+        return BUILDER.createExpression(exFactoryDateFrom, OR, exFactoryDateTo);
+    }
+
+............................................................................................................................
+

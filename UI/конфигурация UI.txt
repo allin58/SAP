@@ -1,0 +1,2 @@
+application/netweight  для neo neo-app.json       "path": "/odata/v2/NetWeightService",        "name": "neo_netweight",        "entryPath": "/NetWeightService" см пример
+                       для CF xs-app.json 
